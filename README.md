@@ -1,107 +1,98 @@
 phpssdbadmin
 ============
 
-### PHP 模块依赖
+### PHP module dependencies
 
-* php-gd
-* php-mcrypt
-* php-openssl
+- php-gd
+- php-mcrypt
+- php-openssl
 
-## 安装
+## Install
 
-编辑 `app/config/config.php`:
+Edit `app/config/config.php`:
 
-	'servers' => array(
-		array(
-			'host' => '127.0.0.1',
-			'port' => '8888',
-		),
-	),
+    'servers' => array(
+    	array(
+    		'host' => '127.0.0.1',
+    		'port' => '8888',
+    	),
+    ),
 
-将 `host` 和 `port` 修改成正确的值.
+modify `host` and `port` to the correct value.
 
-然后编辑你的 Nginx 配置文件, 加入一条 URL 重写规则:
+Then edit your Nginx configuration file, Add a URL rewriting rule:
 
-	location /phpssdbadmin {
-		try_files $uri $uri/ /phpssdbadmin/index.php?$args;
-	}
+    location /phpssdbadmin {
+    	try_files $uri $uri/ /phpssdbadmin/index.php?$args;
+    }
 
-__注意: 如果你还没有配置好 php, 请先配置好 php! 下面是一个示例, 但不保证你能完全理解. 如果你无法理解, 请在搜索引擎上学习如何配置 nginx+php, 谢谢!__
+**Note: If you haven't configured php yet, please configure php first! Here is an example , but it is not guaranteed that you can fully understand. If you can’t understand, please learn how to configure nginx+php on the search engine, thank you!**
 
-	index index.php;
-	root /somewhere/htdocs
-	location ~ \.php$ {
-		include        fastcgi_params;
-		fastcgi_pass   127.0.0.1:9000;
-		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-	}
+    index index.php;
+    root /somewhere/htdocs
+    location ~ \.php$ {
+    	include fastcgi_params;
+    	fastcgi_pass 127.0.0.1:9000;
+    	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
 
-如果你使用的是 Apache 的话, 你可以试试这条 URL 重写规则.
+If you are using Apache, you can try this URL rewriting rule.
 
-	<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteBase /phpssdbadmin/
-	RewriteCond %{REQUEST_FILENAME} !-f 
-	RewriteCond %{REQUEST_FILENAME} !-d 
-	RewriteRule . /phpssdbadmin/index.php [L] 
-	</IfModule>
+    RewriteEngine On
+    RewriteBase /phpssdbadmin/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /phpssdbadmin/index.php [L]
 
-
-phpssdbadmin
-============
+# phpssdbadmin
 
 SSDB Admin Tool Built with PHP.
 
 ### PHP module dependency
 
-* php-gd
-* php-mcrypt
-* php-openssl
+- php-gd
+- php-mcrypt
+- php-openssl
 
 ## Install
 
 Edit `app/config/config.conf`:
 
-	'servers' => array(
-		array(
-			'host' => '127.0.0.1',
-			'port' => '8888',
-		),
-	),
+    'servers' => array(
+    	array(
+    		'host' => '127.0.0.1',
+    		'port' => '8888',
+    	),
+    ),
 
 Change `host` and `port` to the right values.
 
 Then edit your Nginx configuration, add one URL rewrite rule as:
 
-	location /phpssdbadmin {
-		try_files $uri $uri/ /phpssdbadmin/index.php?$args;
-	}
+    location /phpssdbadmin {
+    	try_files $uri $uri/ /phpssdbadmin/index.php?$args;
+    }
 
-__Your have to set up nginx+php first!__
+**Your have to set up nginx+php first!**
 
-	index index.php;
-	root /somewhere/htdocs
-	location ~ \.php$ {
-		include        fastcgi_params;
-		fastcgi_pass   127.0.0.1:9000;
-		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-	}
-
+    index index.php;
+    root /somewhere/htdocs
+    location ~ \.php$ {
+    	include        fastcgi_params;
+    	fastcgi_pass   127.0.0.1:9000;
+    	fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    }
 
 If you are using Apache, try this URL rewrite rule:
 
-	<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteBase /phpssdbadmin/
-	RewriteCond %{REQUEST_FILENAME} !-f 
-	RewriteCond %{REQUEST_FILENAME} !-d 
-	RewriteRule . /phpssdbadmin/index.php [L] 
-	</IfModule>
-
+    RewriteEngine On
+    RewriteBase /phpssdbadmin/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /phpssdbadmin/index.php [L]
 
 ## Screenshots
 
 ![](./imgs/phpssdbadmin-index.png)
 
 ![](./imgs/phpssdbadmin-hash.png)
-
